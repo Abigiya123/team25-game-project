@@ -1,0 +1,41 @@
+# PlantUML code for game's design
+@startuml
+class Avatar {
+speed: int
+x: float
+y: float
+height: int
+width: int
+image
+}
+
+class Track {
+x: float
+y: float
+height: int
+width: int
+image
+checkpoints: []
+}
+
+class Obstacle {
+x: float
+y: float
+height: int
+width: int
+image
+}
+
+class Controller {
+
+}
+
+class Game {
+
+}
+
+Controller -down-> Game
+Game -down-> "*" Avatar
+Game -down-> Track
+Game -down-> "*" Obstacle
+@enduml
