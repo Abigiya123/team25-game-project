@@ -4,7 +4,8 @@ from Game import Game
 class View:
     """Constructor"""
     def __init__(self, screen: pygame.Surface, game: Game) -> None:
-        pass
+        self.screen = screen
+        self.game = game
     
     """
     - Draws the background
