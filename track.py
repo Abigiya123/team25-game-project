@@ -1,16 +1,13 @@
+import pygame
+
 class Track:
-    def __init__(self, x, y, width, height, image, checkpoints):
-        self.x = x
-        self.y = y
-        self.width = width
-        self.height = height
-        self.image = image
-        self.checkpoints = checkpoints
+    def __init__(self, image_path):
+        self.image = pygame.image.load(image_path)
+        self.width = self.image.get_width()
+        self.height = self.image.get_height()
 
-    def display(self):
-        # Code to display the track using Pygame
-        pass
+    def display(self, screen):
+        screen.blit(self.image, (0, 0))
 
-    def check_checkpoint(self, car):
-        # Code to check if a car has reached a checkpoint
-        pass
+
+

@@ -1,26 +1,19 @@
+import pygame
+
 class Car:
-    def __init__(self, speed, x, y, width, height, image):
+    def __init__(self, speed, x, y, image_path):
         self.speed = speed
         self.x = x
         self.y = y
-        self.width = width
-        self.height = height
-        self.image = image
+        self.image = pygame.image.load(image_path)
+        self.width = self.image.get_width()
+        self.height = self.image.get_height()
 
-    def move(self, direction):
-        if direction == 'left':
-            self.x -= self.speed
-        elif direction == 'right':
-            self.x += self.speed
-        elif direction == 'up':
-            self.y -= self.speed
-        elif direction == 'down':
-            self.y += self.speed
+    def move(self):
+        self.y += self.speed
 
-    def display(self):
-        # Code to display the car using Pygame
-        pass
+    def display(self, screen):
+        screen.blit(self.image, (self.x, self.y))
 
-    def check_collision(self, other_object):
-        # Code to check collision with another object
-        pass
+
+
