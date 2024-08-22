@@ -1,51 +1,112 @@
 import pygame
-from car import Car
-from track import Track
+import time
 
-# Initialize Pygame
+# Initialize pygame and the mixer module
 pygame.init()
+pygame.mixer.init()
+
+# Load the sound
+cool_sound = pygame.mixer.Sound("cool_sound.wav")  # Ensure this file is in the same directory as your script
 
 # Screen dimensions
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
+width, height = 800, 600
+screen = pygame.display.set_mode((width, height))
+pygame.display.set_caption("Racing Game")
 
-# Create the screen
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+# Colors
+white = (255, 255, 255)
+yellow = (255, 255, 0)
+red = (255, 0, 0)
+black = (0, 0, 0)
 
-# Define paths to images
-track_image_path = 'asset/track.png'
-car1_image_path = 'asset/car1.jpg'
-car2_image_path = 'asset/car2.jpg'
+# Fonts
+font = pygame.font.SysFont(None, 74)
 
-# Create track and cars
-track = Track(track_image_path)
-car1 = Car(5, int(SCREEN_WIDTH * 0.2), 0, car1_image_path)
-car2 = Car(3, int(SCREEN_WIDTH * 0.6), 0, car2_image_path)
+# Track class
+class Track:
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
 
-# Function to move cars until they reach the bottom
-def move_cars(car1, car2, screen, track):
-    while car1.y < SCREEN_HEIGHT or car2.y < SCREEN_HEIGHT:
+    def draw(self, screen):
+        # Draw the road
+        pygame.draw.rect(screen, black, [150, 0, self.width - 300, self.height])
+
+        # Draw the finish line
+        pygame.draw.rect(screen, red, [150, 100, self.width - 300, 10])
+
+        # Draw the middle dashed line
+        for i in range(0, self.height, 40):
+            pygame.draw.rect(screen, yellow, [width // 2 - 5, i, 10, 20])
+
+# Car class
+class Car:
+    def __init__(self, x, y, width, height, image):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        self.image = pygame.image.load(image)
+        self.image = pygame.transform.scale(self.image, (self.width, self.height))
+
+    def draw(self, screen):
+        screen.blit(self.image, (self.x, self.y))
+
+    def move(self, speed):
+        self.y -= speed
+
+def display_message(screen, message, color, font, position):
+    text = font.render(message, True, color)
+    screen.blit(text, position)
+    pygame.display.update()
+
+def main():
+    running = True
+    clock = pygame.time.Clock()
+
+    # Create the track
+    track = Track(width, height)
+
+    # Create the cars
+    car1 = Car(200, height - 100, 50, 80, "asset/car1.jpg")
+    car2 = Car(width - 250, height - 100, 50, 80, "asset/car2.jpg")
+
+
+    car1_speed = 5
+    car2_speed = 3
+
+    car1_won = False
+
+    while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
-                return
-        
-        if car1.y < SCREEN_HEIGHT:
-            car1.move()
-        if car2.y < SCREEN_HEIGHT:
-            car2.move()
+                running = False
 
-        # Draw everything
-        screen.fill((0, 0, 0))  # Clear the screen with black
-        track.display(screen)
-        car1.display(screen)
-        car2.display(screen)
+        # Move the cars
+        car1.move(car1_speed)
+        car2.move(car2_speed)
 
-        pygame.display.flip()
-        pygame.time.delay(50)  # Delay for smoother animation
+        # Check for the finish line crossing
+        if car1.y <= 100:  # Assuming finish line is at y=100
+            car1_won = True
+            car1_speed = 0
+            car2_speed = 0
+            cool_sound.play()  # Play the sound
+            display_message(screen, "cool, cool, cool", white, font, (200, 200))
+            pygame.display.update()
+            time.sleep(5)  # Keep the message on screen for 5 seconds
+            running = False
 
-# Start the race
-move_cars(car1, car2, screen, track)
+        # Drawing everything
+        screen.fill(white)
+        track.draw(screen)
+        car1.draw(screen)
+        car2.draw(screen)
+        pygame.display.update()
 
-# Quit Pygame
-pygame.quit()
+        clock.tick(60)
+
+    pygame.quit()
+
+if __name__ == "__main__":
+    main()
