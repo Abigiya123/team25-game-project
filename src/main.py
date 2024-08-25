@@ -1,7 +1,7 @@
 import pygame
-from Game import Game
-from View import View
-from Controller import Controller
+from game import Game
+from view import View
+from controller import Controller
 
 def main():
     # Initializes pygame
@@ -10,8 +10,12 @@ def main():
     # Set display's caption
     pygame.display.set_caption("Austin v.s. Felipe")
     
+    # Screen dimensions
+    SCREEN_WIDTH = 800
+    SCREEN_HEIGHT = 600
+    
     # Initializes a screen and a clock
-    screen = pygame.display.set_mode((1500, 1000))
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
     
     # Constructs the Game, View, and Controller

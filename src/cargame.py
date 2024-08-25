@@ -30,10 +30,10 @@ def move_cars(car1, car2, screen, track):
                 pygame.quit()
                 return
         
-        if car1.y < SCREEN_HEIGHT:
-            car1.move()
-        if car2.y < SCREEN_HEIGHT:
-            car2.move()
+        # if car1.y < SCREEN_HEIGHT:
+        #     car1.move()
+        # if car2.y < SCREEN_HEIGHT:
+        #     car2.move()
 
         # Draw everything
         screen.fill((0, 0, 0))  # Clear the screen with black
