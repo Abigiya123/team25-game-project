@@ -1,4 +1,4 @@
-import pygame
+import pygame  
 
 class Track:
     def __init__(self, width, height, lane_width):
@@ -20,12 +20,11 @@ class Track:
         middle_line_x = self.track_start_x + self.lane_width
         pygame.draw.line(screen, (255, 255, 0), (middle_line_x, 0), (middle_line_x, self.height), 5)  # Yellow line
 
-        # Draw the finish line across the track only
-        finish_line_y = self.height // 4  # Position of the finish line (you can adjust this)
+        # Draw the finish line across the track
+        finish_line_y = self.height // 8  # Position of the finish line (moved toward the top)
         pygame.draw.line(screen, (255, 0, 0), (self.track_start_x, finish_line_y), (self.track_start_x + self.track_width, finish_line_y), 10)  # Red finish line
 
     def check_finish_line(self, car):
         # Check if the car has crossed the finish line
-        finish_line_y = self.height // 4  # Finish line y-coordinate
+        finish_line_y = self.height // 8  # Finish line y-coordinate
         return car.y < finish_line_y
-
