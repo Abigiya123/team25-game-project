@@ -16,9 +16,5 @@ class Car:
     def move_up(self):
         self.y -= self.speed
 
-<<<<<<< HEAD
     def move_down(self):
         self.y += self.speed
-=======
-
->>>>>>> d5bcf1b34ca8f62cc5cd9d7a01f54f2edbdba27d
