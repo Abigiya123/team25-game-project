@@ -1,12 +1,17 @@
 import pygame  
 
 class Track:
-    def __init__(self, width, height, lane_width):
+    def __init__(self, screen: pygame.Surface, width, height, lane_width):
+        self.screen = screen
         self.width = width
         self.height = height
         self.lane_width = lane_width
         self.track_width = 2 * lane_width  # Total track width (left lane + right lane)
         self.track_start_x = (width - self.track_width) // 2  # Start of the track on the x-axis
+
+    def display(self):
+        self.screen.blit(self.image, (0, 0))
+
 
     def display(self, screen):
         # Draw the left and right lanes
