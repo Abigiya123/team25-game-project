@@ -31,7 +31,7 @@
 -**System Requirements**: Minimum and recommended specifications.
 
 ### Contact Information
-For questions or support, please contact anan.afrida.yes@gmail.com , abigiyabeneyam@gmail.com ,qanhngo.cs@gmail.com, Theresa.Thompson56@my.benedict.edu.
+For questions or support, please contact anan.afrida.yes@gmail.com , abigiyabeneyam@gmail.com ,qanhngo.cs@gmail.com, theresathompson876@gmail.com.
 
 ## Feedback and Progress
 - **Rewards System:** Incentivizes the winning player using one star per game
